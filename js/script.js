@@ -162,7 +162,7 @@ function saveLocal(){
 
     localStorage.setItem('initialInput', initialInput);
 
-console,console.log(saveLocal);
+
 }
 
 }
