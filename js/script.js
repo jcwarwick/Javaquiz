@@ -3,10 +3,12 @@ const answerButtonsElement = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-button");
 const questionElement = document.getElementById("question");
 const startButton = document.getElementById('start-button')
+const submitButton = document.getElementById("submit-button");
 
+submitButton.style.display = "none";
 
 var timeLeft = 30;
-var scoreBoard = 0
+
 var elem = document.getElementById('Timer');
 
 
@@ -126,13 +128,17 @@ if (currentQuestionIndex < myQuestions.length) {
 
 showQuestion(myQuestions[currentQuestionIndex]);
 
+localStorage.setItem('timer',"inital input")
 
 } else {
 
 
 // Quiz finished
-//add a condition to stop my timer afer there are no more questions
 
+
+
+
+var initialInput = document.createElement("input");
 
 
 clearInterval(timerId);
@@ -140,11 +146,27 @@ clearInterval(timerId);
 
 questionElement.innerText = "Congratulations! Quiz completed.";
 
+questionElement.innerText= "Your score " + timeLeft;
+
+questionElement.appendChild( initialInput );
+
+submitButton.style.display = '';
 
 nextButton.style.display = "none";
 
+submitButton.addEventListener('click', saveLocal)
+
+function saveLocal(){
+
+    localStorage.setItem('timeLeft', timeLeft);
+
+    localStorage.setItem('initialInput', initialInput);
+
+console,console.log(saveLocal);
+}
 
 }
+
 }
 
 

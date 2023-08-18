@@ -1,3 +1,4 @@
 # Javaquiz
 Homework 
- check 
+![image](./img/screenshot.png)
+ https://jcwarwick.github.io/Javaquiz/
