@@ -15,78 +15,78 @@ var elem = document.getElementById('Timer');
 var timerId = setInterval(countdown, 1000);
 
 
-function countdown() {
+function countdown(){
 
 
-    if (timeLeft == 0) {
+if (timeLeft == 0) {
 
 
-        clearInterval(timerId);
+clearInterval(timerId);
 
 
 
 
-    } else {
+} else{
 
 
-        elem.innerHTML = timeLeft + ' seconds remaining';
+elem.innerHTML = timeLeft + ' seconds remaining';
 
 
-        timeLeft--;
-    }
+timeLeft--;
+}
 }
 
 
 var myQuestions = [
-    {
-        question: "how would you write 'Hello World!' in an alert box?",
-        answers: [
-            'msg("Hello World")',
-            'alert("Hello World")',
-            'alertbox("Hello World")',
-        ],
-        correctAnswer: 'alert("Hello World")'
-    },
-    {
-        question: "inside of which HTML element do we put the java script?",
-        answers: [
-            'script',
-            'scripting',
-            'javascript',
-        ],
-        correctAnswer: 'script'
-    },
+{
+question: "how would you write 'Hello World!' in an alert box?",
+answers: [
+'msg("Hello World")',
+'alert("Hello World")',
+'alertbox("Hello World")',
+],
+correctAnswer: 'alert("Hello World")'
+},
+{
+question: "inside of which HTML element do we put the java script?",
+answers: [
+'script',
+'scripting',
+'javascript',
+],
+correctAnswer: 'script'
+},
 
 
-    {
-        question: "who invented Javascript?",
-        answers: [
-            'Brendan Eich',
-            'Josh Peck',
-            'Robb Stark',
-        ],
-        correctAnswer: 'Brendan Eich'
-    },
+{
+question: "who invented Javascript?",
+answers: [
+'Brendan Eich',
+'Josh Peck',
+'Robb Stark',
+],
+correctAnswer: 'Brendan Eich'
+},
 
 
-    {
-        question: "What year did they change the name to Javascript from Livescript?",
-        answers: [
-            '1979',
-            '1998',
-            '2004',
-        ],
-        correctAnswer: '1998'
-    },
-    {
-        question: "who was president when Java script was invented",
-        answers: [
-            'George Bush',
-            'Barack Obama',
-            'Bill Clinton',
-        ],
-        correctAnswer: 'Bill Clinton'
-    },
+{
+question: "What year did they change the name to Javascript from Livescript?",
+answers: [
+'1979',
+'1998',
+'2004',
+],
+correctAnswer: '1998'
+},
+{
+question: "who was president when Java script was invented",
+answers: [
+'George Bush',
+'Barack Obama',
+'Bill Clinton',
+],
+correctAnswer: 'Bill Clinton'
+},
 ];
 
 
@@ -96,10 +96,10 @@ let currentQuestionIndex = [-1];
 nextButton.addEventListener("click", () => {
 
 
-    currentQuestionIndex++;
+currentQuestionIndex++;
 
 
-    nextQuestion();
+nextQuestion();
 
 
 });
@@ -108,10 +108,10 @@ nextButton.addEventListener("click", () => {
 function startQuiz() {
 
 
-    currentQuestionIndex = -1;
+currentQuestionIndex = -1;
 
 
-    nextQuestion();
+nextQuestion();
 
 
 }
@@ -120,57 +120,52 @@ function startQuiz() {
 function nextQuestion() {
 
 
-    clearAnswerButtons();
+clearAnswerButtons();
 
 
-    if (currentQuestionIndex < myQuestions.length) {
+if (currentQuestionIndex < myQuestions.length) {
 
 
-        showQuestion(myQuestions[currentQuestionIndex]);
+showQuestion(myQuestions[currentQuestionIndex]);
 
-        localStorage.setItem('timer', "inital input")
+localStorage.setItem('timer',"inital input")
 
-    } else {
-
-
-        // Quiz finished
+} else {
 
 
+// Quiz finished
 
 
-        var initialInput = document.createElement("input");
 
 
-        clearInterval(timerId);
+var initialInput = document.createElement("input");
 
 
-        questionElement.innerText = "Congratulations! Quiz completed.";
+clearInterval(timerId);
 
-        questionElement.innerText = "Your score " + timeLeft;
 
-        questionElement.appendChild(initialInput);
+questionElement.innerText = "Congratulations! Quiz completed.";
 
-        submitButton.style.display = '';
+questionElement.innerText= "Your score " + timeLeft;
 
-        nextButton.style.display = "none";
+questionElement.appendChild( initialInput );
 
-        submitButton.addEventListener('click', saveLocal)
+submitButton.style.display = '';
 
-      
-function saveLocal() {
-    // Get the value of the initial input element
-    var initialInput = document.createElement("input");
-    initialInput = document.getElementById("initialInput"); // Get the input element by ID
+nextButton.style.display = "none";
 
-    // Save timeLeft and initialInput value to local storage
+submitButton.addEventListener('click', saveLocal)
+
+function saveLocal(){
+
     localStorage.setItem('timeLeft', timeLeft);
-    localStorage.setItem('initialInput', initialInput.value); // Save the value, not the element
 
-    console.log("Local storage saved:", localStorage.getItem('timeLeft'), localStorage.getItem('initialInput'));
+    localStorage.setItem('initialInput', initialInput);
+
+console,console.log(saveLocal);
 }
 
-
-    }
+}
 
 }
 
@@ -180,64 +175,62 @@ function showQuestion(question) {
 
 
 
+questionElement.innerText = question.question;
 
 
-    questionElement.innerText = question.question;
+question.answers.forEach(answer => {
 
 
-    question.answers.forEach(answer => {
-
-
-        const button = document.createElement("button");
+const button = document.createElement("button");
 
 
 
 
 
 
-        button.innerText = answer;
+button.innerText = answer;
 
 
-        button.classList.add("btn");
-        //add color to button to highlight chosen answer
-        button.addEventListener("click", () => {
-            button.style.backgroundColor = 'grey'
-            checkAnswer(answer)
+button.classList.add("btn");
+//add color to button to highlight chosen answer
+button.addEventListener("click", () => {
+button.style.backgroundColor = 'grey'
+checkAnswer(answer)
 
 
-        });
+});
 
 
-        answerButtonsElement.appendChild(button);
+answerButtonsElement.appendChild(button);
 
 
-    });
+});
 }
 //call function check answer after next button is clicked
-function checkAnswer(answer) {
+function checkAnswer(answer){
 
 
-    if (answer === myQuestions[currentQuestionIndex].correctAnswer) {
-        timeLeft += 10
-    }
-    else {
+if(answer===myQuestions[currentQuestionIndex].correctAnswer){
+timeLeft += 10
+}
+else {
 
 
-        timeLeft -= 10
-    }
+timeLeft -=10
+}
 }
 
 
 function clearAnswerButtons() {
 
 
-    while (answerButtonsElement.firstChild) {
+while (answerButtonsElement.firstChild) {
 
 
-        answerButtonsElement.removeChild(answerButtonsElement.firstChild);
+answerButtonsElement.removeChild(answerButtonsElement.firstChild);
 
 
-    }
+}
 }
 
 
